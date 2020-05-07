@@ -1,0 +1,30 @@
+PROJECT_NAME=$1
+URL=$2
+
+if [[ -f $PROJECT_NAME/lib/lib$PROJECT_NAME.a ]]; then
+	echo "$PROJECT_NAME/lib/lib$PROJECT_NAME.a Exist"
+	exit 0
+fi
+
+# 临时拉取二进制的路径，后期接入网络后考虑删除掉
+cd ~/Git/Sourcetree/Gitlab-Self/IDEALComponents/binaryfiles/
+git pull
+
+if [[ ! $URL ]]; then
+	URL_KEY="cbk_zipURL="
+	URL=$(cat $PROJECT_NAME.podspec | grep "$URL_KEY" | sed -e "s/$URL_KEY//g" | sed -e "s/\'//g" | sed -e "s/\"//g")
+fi
+
+if [[ ! -d cbktemp ]]; then
+	mkdir cbktemp
+fi
+cd cbktemp
+
+RET=$(curl --fail -O -v $URL)
+if [[ -f $PROJECT_NAME.zip && ! $RET ]]; then
+	unzip $PROJECT_NAME.zip
+	cp -fr $PROJECT_NAME/lib ../$PROJECT_NAME/
+fi
+
+cd ..
+rm -fr cbktemp
