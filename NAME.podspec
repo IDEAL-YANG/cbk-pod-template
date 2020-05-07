@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = '${POD_NAME}'
   s.version          = '0.1.0'
-  s.summary          = "#{s.name}, 组件模块."
+  s.summary          = '${POD_NAME}, 组件模块.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -24,7 +24,7 @@ CBK私有库, 主要是为了组件化整个工程.
   负责: XXX(理由具体库具体写)
                        DESC
 
-  s.homepage         = "https://git.caibeike.net/mobile_ios/#{s.name}"
+  s.homepage         = 'https://git.caibeike.net/mobile_ios/${POD_NAME}'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '${USER_NAME}' => '${USER_EMAIL}' }
@@ -32,36 +32,36 @@ CBK私有库, 主要是为了组件化整个工程.
   s.ios.deployment_target = '8.0'
 
   # 暂时本地路径，后期换成网络url
-  cbk_zipURL="file:///Users/Ideal-company-taidu/Git/Sourcetree/Gitlab-Self/IDEALComponents/binaryfiles/#{s.name}.zip"
-  if ENV['IS_SOURCE'] || ENV["#{s.name}_SOURCE"]
-      s.source           = { :git => "https://git.caibeike.net/mobile_ios/#{s.name}.git", :tag => s.version.to_s }
+  cbk_zipURL='file:///Users/Ideal-company-taidu/Git/Sourcetree/Gitlab-Self/IDEALComponents/binaryfiles/${POD_NAME}.zip'
+  if ENV['IS_SOURCE'] || ENV['${POD_NAME}_SOURCE']
+      s.source       = { :git => 'https://git.caibeike.net/mobile_ios/${POD_NAME}.git', :tag => s.version.to_s }
   else
-      s.source           = { :http => cbk_zipURL}
+      s.source       = { :http => cbk_zipURL }
   end
 
-  if ENV['IS_SOURCE'] || ENV["#{s.name}_SOURCE"]
+  if ENV['IS_SOURCE'] || ENV['${POD_NAME}_SOURCE']
       s.prepare_command = <<-'END'
-        test -f download_zip.sh && sh download_zip.sh s.name
+        test -f download_zip.sh && sh download_zip.sh ${POD_NAME}
       END
       puts '-------------------------------------------------------------------'
-      puts "Notice:#{s.name} is source now"
+      puts 'Notice:${POD_NAME} is source now'
       puts '-------------------------------------------------------------------'
-      s.source_files = "#{s.name}/Classes/**/*"
+      s.source_files = '${POD_NAME}/Classes/**/*'
   else
       puts '-------------------------------------------------------------------'
-      puts "Notice:#{s.name} is binary now"
+      puts 'Notice:${POD_NAME} is binary now'
       puts '-------------------------------------------------------------------'
-      s.source_files = "#{s.name}/Classes/*.h"
-      s.ios.vendored_libraries = "#{s.name}/lib/lib#{s.name}.a"
+      s.source_files = '${POD_NAME}/Classes/*.h'
+      s.ios.vendored_libraries = '${POD_NAME}/lib/lib${POD_NAME}.a'
   end
-  s.preserve_paths = "#{s.name}/lib/lib#{s.name}.a","#{s.name}/Classes/**/*", "download_zip.sh"
+  s.preserve_paths = '${POD_NAME}/lib/lib${POD_NAME}.a','${POD_NAME}/Classes/**/*', 'download_zip.sh'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.public_header_files = "#{s.name}/Classes/*.h"
-  # s.prefix_header_file = "#{s.name}/Classes/#{s.name}-Prefix.pch"
+  s.public_header_files = '${POD_NAME}/Classes/*.h'
+  # s.prefix_header_file = '${POD_NAME}/Classes/${POD_NAME}-Prefix.pch'
   
   # s.resource_bundles = {
-  #   "#{s.name}" => ["#{s.name}/Assets/*.png"]
+  #   '${POD_NAME}' => ['${POD_NAME}/Assets/*.png']
   # }
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
