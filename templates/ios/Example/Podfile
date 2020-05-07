@@ -1,4 +1,4 @@
-source 'https://gitlab.com/Blade-GitLab/Specs.git'
+source 'https://git.caibeike.net/mobile_ios/cbk_private_repo.git'
 source 'https://cdn.cocoapods.org'
 
 platform :ios, '8.0'
