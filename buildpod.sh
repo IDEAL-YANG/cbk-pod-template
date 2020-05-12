@@ -8,7 +8,7 @@ git config --get user.name
 git config --get user.email
 
 echo "publish repo $PROJECT_NAME"
-pod repo push CBKPrivateRepo $PROJECT_NAME.podspec --verbose --use-libraries
+pod repo push cbk_private_repo $PROJECT_NAME.podspec --verbose --use-libraries --allow-warnings
 
 ret=$?
 

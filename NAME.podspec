@@ -31,30 +31,24 @@ CBK私有库, 主要是为了组件化整个工程.
 
   s.ios.deployment_target = '8.0'
 
-  # 暂时本地路径，后期换成网络url
-  cbk_zipURL='file:///Users/Ideal-company-taidu/Git/Sourcetree/Gitlab-Self/IDEALComponents/binaryfiles/${POD_NAME}.zip'
-  if ENV['IS_SOURCE'] || ENV['${POD_NAME}_SOURCE']
-      s.source       = { :git => 'https://git.caibeike.net/mobile_ios/${POD_NAME}.git', :tag => s.version.to_s }
-  else
-      s.source       = { :http => cbk_zipURL }
-  end
-
-  if ENV['IS_SOURCE'] || ENV['${POD_NAME}_SOURCE']
-      s.prepare_command = <<-'END'
-        test -f download_zip.sh && sh download_zip.sh ${POD_NAME}
-      END
+  if ENV['IS_SOURCE'] == 1 || ENV['cbk_navigator_SOURCE'] == 1
       puts '-------------------------------------------------------------------'
       puts 'Notice:${POD_NAME} is source now'
       puts '-------------------------------------------------------------------'
+      s.source       = { :git => 'https://git.caibeike.net/mobile_ios/${POD_NAME}.git', :tag => s.version.to_s }
+
       s.source_files = '${POD_NAME}/Classes/**/*'
   else
       puts '-------------------------------------------------------------------'
       puts 'Notice:${POD_NAME} is binary now'
       puts '-------------------------------------------------------------------'
+      s.source       = { :http => 'http://172.10.3.123:8000/${POD_NAME}_0.1.0.zip' }# 暂时是局域网http路径，后期换成互联网url
+
       s.source_files = '${POD_NAME}/Classes/*.h'
       s.ios.vendored_libraries = '${POD_NAME}/lib/lib${POD_NAME}.a'
   end
-  s.preserve_paths = '${POD_NAME}/lib/lib${POD_NAME}.a','${POD_NAME}/Classes/**/*', 'download_zip.sh'
+
+  s.preserve_paths = '${POD_NAME}/lib/lib${POD_NAME}.a','${POD_NAME}/Classes/**/*'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.public_header_files = '${POD_NAME}/Classes/*.h'

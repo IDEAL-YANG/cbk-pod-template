@@ -15,7 +15,7 @@ init:
   except:
     - tags
   script:
-    - pod repo update CBKPrivateRepo
+    - pod repo update cbk_private_repo
     - git config --get user.name
     - git config --get user.email
     - echo "CI_RUNNER_ID $CI_RUNNER_ID"
@@ -49,7 +49,8 @@ test:
     - cd Example
     - pwd
     - time IS_SOURCE=1 pod install --verbose
-    - time xcodebuild test -workspace $CI_PROJECT_NAME.xcworkspace -scheme $CI_PROJECT_NAME-Example -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation),OS=13.4.1' | xcpretty
+    # 暂时不运行单元测试
+    # - time xcodebuild test -workspace $CI_PROJECT_NAME.xcworkspace -scheme $CI_PROJECT_NAME-Example -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation),OS=13.4.1' | xcpretty
 
 lint_source:
   tags:
