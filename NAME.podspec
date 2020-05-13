@@ -31,7 +31,7 @@ CBK私有库, 主要是为了组件化整个工程.
 
   s.ios.deployment_target = '8.0'
 
-  if ENV['IS_SOURCE'] == '1' || ENV['cbk_navigator_SOURCE'] == '1'
+  if ENV['IS_SOURCE'] == '1' || ENV['${POD_NAME}_SOURCE'] == '1'
       puts '-------------------------------------------------------------------'
       puts 'Notice:${POD_NAME} is source now'
       puts '-------------------------------------------------------------------'
