@@ -17,10 +17,10 @@ cp -rp $BINARY_DIR/ios/ $PROJECT_NAME/lib
 
 rm -rf $BINARY_DIR
 
-# 去除.a armv7s i386的架构
+# 去除.a armv7s i386 x86_64的架构
 cd $PROJECT_NAME/lib
 
-lipo "lib${PROJECT_NAME}.a" -remove armv7s -remove i386 -output "lib${PROJECT_NAME}.a"
+lipo "lib${PROJECT_NAME}.a" -remove armv7s -remove i386 -remove x86_64 -output "lib${PROJECT_NAME}.a"
 # lipo "lib${PROJECT_NAME}.a" -thin armv7 -output "lib${PROJECT_NAME}-armv7.a"
 # lipo "lib${PROJECT_NAME}.a" -thin x86_64 -output "lib${PROJECT_NAME}-x86_64.a"
 
